@@ -1,4 +1,4 @@
-import type { IOrderBy } from '@/megio-sdk/collections/types/IOrderBy'
+import type { IOrderBy } from '@/collections/types/IOrderBy'
 
 export interface IShowParams {
     table: string,

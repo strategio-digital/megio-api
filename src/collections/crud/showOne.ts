@@ -1,8 +1,8 @@
-import { megio } from '@/megio-sdk'
-import type { IResponse } from '@/megio-sdk/types/IResponse'
-import type { IShowOneParams } from '@/megio-sdk/collections/types/IShowOneParams'
-import type { IRow } from '@/megio-sdk/collections/types/IRow'
-import type { ISchema } from '@/megio-sdk/collections/types/ISchema'
+import { megio } from '@/index.ts'
+import type { IResponse } from '@/types/IResponse'
+import type { IShowOneParams } from '@/collections/types/IShowOneParams'
+import type { IRow } from '@/collections/types/IRow'
+import type { ISchema } from '@/collections/types/ISchema'
 
 export interface IResp extends IResponse {
     data: IRow | any,

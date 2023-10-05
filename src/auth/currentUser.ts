@@ -1,4 +1,4 @@
-import type { IAuthUser } from '@/megio-sdk/auth/types/IAuthUser'
+import type { IAuthUser } from '@/auth/types/IAuthUser'
 
 const currentUser = (): IAuthUser | null => {
     const data = localStorage.getItem('strategio_saas_user')

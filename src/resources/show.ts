@@ -1,6 +1,6 @@
-import { megio } from '@/megio-sdk'
-import type { IResponse } from '@/megio-sdk/types/IResponse'
-import type { IResponseData } from '@/megio-sdk/resources/types/IResponseData'
+import { megio } from '@/index.ts'
+import type { IResponse } from '@/types/IResponse'
+import type { IResponseData } from '@/resources/types/IResponseData'
 
 export interface IResp extends IResponse {
     data: IResponseData

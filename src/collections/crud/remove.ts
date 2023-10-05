@@ -1,6 +1,6 @@
-import { megio } from '@/megio-sdk'
-import type { IResponse } from '@/megio-sdk/types/IResponse'
-import type { IRemoveParams } from '@/megio-sdk/collections/types/IRemoveParams'
+import { megio } from '@/index.ts'
+import type { IResponse } from '@/types/IResponse'
+import type { IRemoveParams } from '@/collections/types/IRemoveParams'
 
 export interface IResp extends IResponse {
     data: {

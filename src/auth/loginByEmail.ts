@@ -1,6 +1,6 @@
-import { megio } from '@/megio-sdk'
-import type { IResponse } from '@/megio-sdk/types/IResponse'
-import type { IAuthUser } from '@/megio-sdk/auth/types/IAuthUser'
+import { megio } from '@/index.ts'
+import type { IResponse } from '@/types/IResponse'
+import type { IAuthUser } from '@/auth/types/IAuthUser'
 
 export interface IResp extends IResponse {
     data: IAuthUser

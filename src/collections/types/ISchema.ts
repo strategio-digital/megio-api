@@ -1,4 +1,4 @@
-import type { ISchemaProp } from '@/megio-sdk/collections/types/ISchemaProp'
+import type { ISchemaProp } from '@/collections/types/ISchemaProp'
 
 export interface ISchema {
     meta: {
