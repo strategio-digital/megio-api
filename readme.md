@@ -36,7 +36,7 @@ console.log(resp)
 ```typescript
 import { megio } from 'megio-sdk'
 
-// Fetch custom endp-point
+// Fetch custom end-point
 const resp = await megio.fetch(customUri, customJsonBody)
 
 // Auth
@@ -54,6 +54,9 @@ const resp = await megio.resources.update(...params)
 const resp = await megio.resources.createRole(...params)
 const resp = await megio.resources.updateRole(...params)
 const resp = await megio.resources.removeRole(...params)
+
+// Navbar (collections)
+const resp = await megio.collections.navbar(...params)
 ```
 
 ## Working with user
