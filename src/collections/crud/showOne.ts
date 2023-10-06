@@ -1,8 +1,8 @@
-import { megio } from '@/index.ts'
-import type { IResponse } from '@/types/IResponse'
-import type { IShowOneParams } from '@/collections/types/IShowOneParams'
-import type { IRow } from '@/collections/types/IRow'
-import type { ISchema } from '@/collections/types/ISchema'
+import { megio } from './../../index.ts'
+import type { IResponse } from './../../types/IResponse'
+import type { IShowOneParams } from './../types/IShowOneParams'
+import type { IRow } from './../types/IRow'
+import type { ISchema } from './../types/ISchema'
 
 export interface IResp extends IResponse {
     data: IRow | any,

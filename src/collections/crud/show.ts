@@ -1,9 +1,9 @@
-import { megio } from '@/index.ts'
-import type { IResponse } from '@/types/IResponse'
-import type { IShowParams } from '@/collections/types/IShowParams'
-import type { IRow } from '@/collections/types/IRow'
-import type { IPagination } from '@/collections/types/IPagination'
-import type { ISchema } from '@/collections/types/ISchema'
+import { megio } from './../../index.ts'
+import type { IResponse } from './../../types/IResponse'
+import type { IShowParams } from './../types/IShowParams'
+import type { IRow } from './../types/IRow'
+import type { IPagination } from './../types/IPagination'
+import type { ISchema } from './../types/ISchema'
 
 export interface IResp extends IResponse {
     data: {

@@ -1,7 +1,7 @@
-import type { IRole } from '@/resources/types/IRole'
-import type { IResource } from '@/resources/types/IResource'
-import type { IGroupedResourcesWithRoles } from '@/resources/types/IGroupedResourcesWithRoles'
-import type { IResourceDiff } from '@/resources/types/IResourceDiff'
+import type { IRole } from './IRole'
+import type { IResource } from './IResource'
+import type { IGroupedResourcesWithRoles } from './IGroupedResourcesWithRoles'
+import type { IResourceDiff } from './IResourceDiff'
 
 export interface IResponseData {
     roles: IRole[],

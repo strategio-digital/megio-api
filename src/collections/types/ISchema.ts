@@ -1,4 +1,4 @@
-import type { ISchemaProp } from '@/collections/types/ISchemaProp'
+import type { ISchemaProp } from './ISchemaProp'
 
 export interface ISchema {
     meta: {

@@ -3,13 +3,14 @@
   "private": false,
   "version": "0.6.0",
   "type": "module",
-  "main": "./dist/my-lib.umd.cjs",
-  "module": "./dist/my-lib.js",
+  "main": "./dist/megio-sdk.umd.cjs",
+  "module": "./dist/megio-sdk.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.js",
-      "require": "./dist/my-lib.umd.cjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/megio-sdk.js",
+      "require": "./dist/megio-sdk.cjs"
     }
   },
   "files": [
@@ -17,10 +18,10 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build"
   },
   "devDependencies": {
+    "@types/node": "^20.8.2",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.6.0"

@@ -1,4 +1,4 @@
-import type { IOrderBy } from '@/collections/types/IOrderBy'
+import type { IOrderBy } from './IOrderBy'
 
 export interface IShowParams {
     table: string,

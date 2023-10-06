@@ -1,4 +1,4 @@
-import type { IAuthUser } from '@/auth/types/IAuthUser'
+import type { IAuthUser } from './types/IAuthUser.ts'
 
 const currentUser = (): IAuthUser | null => {
     const data = localStorage.getItem('strategio_saas_user')

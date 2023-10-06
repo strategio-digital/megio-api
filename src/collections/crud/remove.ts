@@ -1,6 +1,6 @@
-import { megio } from '@/index.ts'
-import type { IResponse } from '@/types/IResponse'
-import type { IRemoveParams } from '@/collections/types/IRemoveParams'
+import { megio } from './../../index.ts'
+import type { IResponse } from './../../types/IResponse'
+import type { IRemoveParams } from './../types/IRemoveParams'
 
 export interface IResp extends IResponse {
     data: {
