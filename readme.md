@@ -31,17 +31,13 @@ const resp = await megio.auth.loginByEmail('jz@strategio.dev', 'Test1234', 'user
 console.log(resp)
 ```
 
-## All end-points
+## Megio end-points
 
 ```typescript
 import { megio } from 'megio-sdk'
 
-// Fetch
-const resp = await megio.fetch(uri, json)
-
-// User
-const user = megio.auth.user.get() // get current user
-megio.auth.logout() // logout current user
+// Fetch custom endp-point
+const resp = await megio.fetch(customUri, customJsonBody)
 
 // Auth
 const resp = await megio.auth.loginByEmail(...params)
@@ -51,7 +47,6 @@ const resp = await megio.auth.revokeToken(...params)
 const resp = await megio.collections.show(...params)
 const resp = await megio.collections.showOne(...params)
 const resp = await megio.collections.remove(...params)
-const resp = await megio.collections.navbar(...params)
 
 // Resources
 const resp = await megio.resources.show(...params)
@@ -61,9 +56,13 @@ const resp = await megio.resources.updateRole(...params)
 const resp = await megio.resources.removeRole(...params)
 ```
 
-## Working with user permissions
+## Working with user
 ```typescript
-megio.auth.user.get()
+// User
+megio.auth.logout() // logout current user
+megio.auth.user.get() // get current user
+
+// Permissions
 megio.auth.user.getResources()
 megio.auth.user.getRoles()
 megio.auth.user.hasRole('role')
