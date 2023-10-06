@@ -37,7 +37,7 @@ console.log(resp)
 import { megio } from 'megio-sdk'
 
 // Fetch
-const resp = await megio.fetch('https://api.com/get-x', { id: 1 })
+const resp = await megio.fetch(uri, json)
 
 // User
 const user = megio.auth.user.get() // get current user
