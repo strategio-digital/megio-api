@@ -1,16 +1,16 @@
 {
-  "name": "megio-sdk",
+  "name": "megio-api",
   "private": false,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
-  "main": "./dist/megio-sdk.umd.cjs",
-  "module": "./dist/megio-sdk.js",
+  "main": "./dist/megio-api.umd.cjs",
+  "module": "./dist/megio-api.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/megio-sdk.js",
-      "require": "./dist/megio-sdk.cjs"
+      "import": "./dist/megio-api.js",
+      "require": "./dist/megio-api.cjs"
     }
   },
   "files": [

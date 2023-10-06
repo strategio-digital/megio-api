@@ -6,8 +6,8 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            name: 'megio-sdk',
-            fileName: 'megio-sdk',
+            name: 'megio-api',
+            fileName: 'megio-api',
         },
     },
     plugins: [dts()],

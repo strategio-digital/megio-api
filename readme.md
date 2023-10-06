@@ -1,16 +1,16 @@
-# Megio SDK
+# Megio API SDK
 
-JavaScript & TypeScript toolkit for calling Megio APIs.
+JavaScript & TypeScript SDK (Software Development Kit) for calling Megio APIs.
 
 ## Installation
 
-`yarn add megio-sdk`
+`yarn add megio-api`
 
 
 ## Setup
 
 ```typescript
-import { setup } from 'megio-sdk'
+import { setup } from 'megio-api'
 
 // Override default end-point
 setup('http://localhost:8090/', errorHandler)
@@ -24,7 +24,7 @@ function errorHandler(response: Response, errors: string[]) {
 ## API call example
 
 ```typescript
-import { megio } from 'megio-sdk'
+import { megio } from 'megio-api'
 
 // User login
 const resp = await megio.auth.loginByEmail('jz@strategio.dev', 'Test1234', 'user')
@@ -34,7 +34,7 @@ console.log(resp)
 ## Megio end-points
 
 ```typescript
-import { megio } from 'megio-sdk'
+import { megio } from 'megio-api'
 
 // Fetch custom end-point
 const resp = await megio.fetch(customUri, customJsonBody)
