@@ -1,6 +1,6 @@
 import loginByEmail from './auth/loginByEmail'
 import logout from './auth/logout'
-import currentUser from './auth/currentUser'
+import user from './auth/user'
 import show from './collections/crud/show'
 import showOne from './collections/crud/showOne'
 import remove from './collections/crud/remove'
@@ -32,10 +32,10 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
         }
     }
 
-    const user = currentUser()
+    const currentUser = user.get()
 
-    if (user) {
-        info.headers = { ...info.headers, 'Authorization': `Bearer ${user.bearer_token}` }
+    if (currentUser) {
+        info.headers = { ...info.headers, 'Authorization': `Bearer ${currentUser.bearer_token}` }
     }
 
     const response = await fetch(props.baseUrl + uri, info)
@@ -61,7 +61,7 @@ export const megio = {
         navbar
     },
     auth: {
-        currentUser,
+        user,
         loginByEmail,
         logout,
         revokeToken

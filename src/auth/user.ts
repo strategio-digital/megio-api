@@ -5,21 +5,21 @@ const currentUser = (): IAuthUser | null => {
     return data ? JSON.parse(data) : null
 }
 
-export const currentUserResources = (): string[] => {
+const currentUserResources = (): string[] => {
     const user = currentUser()
     return user?.user.resources || []
 }
 
-export const currentUserRoles = () => {
+const currentUserRoles = () => {
     const user = currentUser()
     return user?.user.roles || []
 }
 
-export const hasRole = (role: string): boolean => {
+const hasRole = (role: string): boolean => {
     return currentUserRoles().includes(role)
 }
 
-export const hasResource = (resource: string): boolean => {
+const hasResource = (resource: string): boolean => {
     if (currentUserRoles().includes('admin')) {
         return true
     }
@@ -27,12 +27,20 @@ export const hasResource = (resource: string): boolean => {
     return currentUserResources().includes(resource)
 }
 
-export const hasAllOfResources = (resources: string[]): boolean => {
+const hasAllOfResources = (resources: string[]): boolean => {
     return resources.every(resource => hasResource(resource))
 }
 
-export const hasAnyOfResources = (resources: string[]): boolean => {
+const hasAnyOfResources = (resources: string[]): boolean => {
     return resources.some(resource => hasResource(resource))
 }
 
-export default currentUser
+export default {
+    get: currentUser,
+    getResources: currentUserResources,
+    getRoles: currentUserRoles,
+    hasRole,
+    hasResource,
+    hasAllOfResources,
+    hasAnyOfResources
+}

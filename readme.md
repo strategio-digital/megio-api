@@ -1,28 +1,27 @@
 # Megio SDK
 
+JavaScript & TypeScript toolkit for calling Megio APIs.
+
 ## Installation
 
 `yarn add megio-sdk`
 
-## Usage
 
-### Setup
+## Setup
 
 ```typescript
 import { setup } from 'megio-sdk'
 
-export function createMegioSdk() {
-    // Override default end-point
-    setup('http://localhost:8090/', errorHandler)
+// Override default end-point
+setup('http://localhost:8090/', errorHandler)
 
-    // Override default non-200 status handler
-    function errorHandler(response: Response, errors: string[]) {
-        console.log(response.status, errors)
-    }
+// Override default non-200 status handler
+function errorHandler(response: Response, errors: string[]) {
+    console.log(response.status, errors)
 }
 ```
 
-### API call example
+## API call example
 
 ```typescript
 import { megio } from 'megio-sdk'
@@ -32,18 +31,20 @@ const resp = await megio.auth.loginByEmail('jz@strategio.dev', 'Test1234', 'user
 console.log(resp)
 ```
 
-### All API end-points
+## All end-points
 
 ```typescript
 import { megio } from 'megio-sdk'
 
 // Fetch
-const resp = await megio.fetch(uri, json)
+const resp = await megio.fetch('https://api.com/get-x', { id: 1 })
+
+// User
+const user = megio.auth.user.get() // get current user
+megio.auth.logout() // logout current user
 
 // Auth
-const resp = await megio.auth.currentUser(...params)
 const resp = await megio.auth.loginByEmail(...params)
-const resp = await megio.auth.logout(...params)
 const resp = await megio.auth.revokeToken(...params)
 
 // Collections
@@ -58,4 +59,15 @@ const resp = await megio.resources.update(...params)
 const resp = await megio.resources.createRole(...params)
 const resp = await megio.resources.updateRole(...params)
 const resp = await megio.resources.removeRole(...params)
+```
+
+## Working with user permissions
+```typescript
+megio.auth.user.get()
+megio.auth.user.getResources()
+megio.auth.user.getRoles()
+megio.auth.user.hasRole('role')
+megio.auth.user.hasResource('res-x')
+megio.auth.user.hasAllOfResources(['res-x', 'res-y'])
+megio.auth.user.hasAnyOfResources(['res-x', 'res-y'])
 ```
