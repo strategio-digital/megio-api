@@ -3,7 +3,7 @@ import type { IRespNavbar } from '../types'
 
 
 const navbar = async (): Promise<IRespNavbar> => {
-    const resp = await megio.fetch(`saas/collections/navbar`, { method: 'POST' })
+    const resp = await megio.fetch(`megio/collections/navbar`, { method: 'POST' })
     return { ...resp, data: resp.data }
 }
 

@@ -1,7 +1,7 @@
 import type { IAuthUser } from './types'
 
 const currentUser = (): IAuthUser | null => {
-    const data = localStorage.getItem('strategio_saas_user')
+    const data = localStorage.getItem('megio_user')
     return data ? JSON.parse(data) : null
 }
 

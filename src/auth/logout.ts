@@ -1,5 +1,5 @@
 const logout = (): void => {
-    localStorage.removeItem('strategio_saas_user')
+    localStorage.removeItem('megio_user')
 }
 
 export default logout
