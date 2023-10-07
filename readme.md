@@ -73,3 +73,11 @@ megio.auth.user.hasResource('res-x')
 megio.auth.user.hasAllOfResources(['res-x', 'res-y'])
 megio.auth.user.hasAnyOfResources(['res-x', 'res-y'])
 ```
+
+## Working with types
+```typescript
+import type { ... } from 'megio-api/types'
+import type { ... } from 'megio-api/types/auth'
+import type { ... } from 'megio-api/types/resources'
+import type { ... } from 'megio-api/types/collections'
+```
