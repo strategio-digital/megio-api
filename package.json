@@ -1,11 +1,10 @@
 {
   "name": "megio-api",
   "private": false,
-  "version": "0.7.13",
+  "version": "0.7.14",
   "type": "module",
   "main": "./dist/megio-api.umd.cjs",
   "module": "./dist/megio-api.js",
-  "types": "./dist/types.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,8 +12,10 @@
       "require": "./dist/megio-api.cjs"
     }
   },
+  "types": "./dist/types.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types.d.ts"
   ],
   "scripts": {
     "dev": "vite",
