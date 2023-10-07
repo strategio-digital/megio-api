@@ -1,7 +1,7 @@
 {
   "name": "megio-api",
   "private": false,
-  "version": "0.7.16",
+  "version": "0.7.17",
   "type": "module",
   "main": "./dist/megio-api.umd.cjs",
   "module": "./dist/megio-api.js",
@@ -11,11 +11,17 @@
       "import": "./dist/megio-api.js",
       "require": "./dist/megio-api.cjs"
     },
-    "./types": "./dist/types.d.ts"
+    "./types": "./dist/types.d.ts",
+    "./types/auth": [
+      "./"
+    ]
   },
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "./dist/auth/loginByEmail.d.ts",
+    "./dist/auth/logout.d.ts",
+    "./dist/auth/revokeToken.d.ts",
+    "./dist/auth/user.d.ts"
   ],
   "scripts": {
     "dev": "vite",
