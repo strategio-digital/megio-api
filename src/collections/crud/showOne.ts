@@ -1,15 +1,7 @@
 import { megio } from './../../index.ts'
-import type { IResponse } from './../../types/IResponse'
-import type { IShowOneParams } from './../types/IShowOneParams'
-import type { IRow } from './../types/IRow'
-import type { ISchema } from './../types/ISchema'
+import type { IRespShowOne, IShowOneParams } from '../types'
 
-export interface IResp extends IResponse {
-    data: IRow | any,
-    schema?: ISchema
-}
-
-const showOne = async (params: IShowOneParams): Promise<IResp> => {
+const showOne = async (params: IShowOneParams): Promise<IRespShowOne> => {
     const resp = await megio.fetch(`saas/collections/show-one`, {
         method: 'POST',
         body: JSON.stringify(params)

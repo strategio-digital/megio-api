@@ -1,10 +1,11 @@
-// Global
-export type * from './types/IResponse';
-export type * from './types/IDateTime';
+export interface IDateTime {
+    date: string
+    timezone: string
+    timezone_type: number
+}
 
-// Resources
-export type * from './resources/types/IGroupedResourcesWithRoles'
-export type * from './resources/types/IResource'
-export type * from './resources/types/IResourceDiff'
-export type * from './resources/types/IResponseData'
-export type * from './resources/types/IRole'
+export interface IResponse {
+    data?: any
+    success: boolean
+    errors: string[]
+}

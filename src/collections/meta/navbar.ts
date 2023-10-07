@@ -1,13 +1,8 @@
 import { megio } from './../../index.ts'
-import type { IResponse } from './../../types/IResponse'
+import type { IRespNavbar } from '../types'
 
-export interface IResp extends IResponse {
-    data: {
-        items: string[]
-    }
-}
 
-const navbar = async (): Promise<IResp> => {
+const navbar = async (): Promise<IRespNavbar> => {
     const resp = await megio.fetch(`saas/collections/navbar`, { method: 'POST' })
     return { ...resp, data: resp.data }
 }

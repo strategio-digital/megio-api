@@ -1,12 +1,7 @@
 import { megio } from './../index.ts'
-import type { IResponse } from './../types/IResponse'
-import type { IAuthUser } from './types/IAuthUser'
+import type { IRespLoginByEmail } from './types'
 
-export interface IResp extends IResponse {
-    data: IAuthUser
-}
-
-const loginByEmail = async (email: string, password: string, source: string): Promise<IResp> => {
+const loginByEmail = async (email: string, password: string, source: string): Promise<IRespLoginByEmail> => {
     const resp = await megio.fetch('saas/auth/email', {
         method: 'POST',
         body: JSON.stringify({ source, email, password })

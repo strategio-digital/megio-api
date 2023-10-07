@@ -1,14 +1,7 @@
 import { megio } from './../../index.ts'
-import type { IResponse } from './../../types/IResponse'
-import type { IRemoveParams } from './../types/IRemoveParams'
+import type { IRemoveParams, IRespRemove } from '../types'
 
-export interface IResp extends IResponse {
-    data: {
-        message: string
-    }
-}
-
-const remove = async (params: IRemoveParams): Promise<IResp> => {
+const remove = async (params: IRemoveParams): Promise<IRespRemove> => {
     const resp = await megio.fetch(`saas/collections/delete`, {
         method: 'DELETE',
         body: JSON.stringify(params)

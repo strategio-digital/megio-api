@@ -1,13 +1,7 @@
 import { megio } from './../index.ts'
-import type { IResponse } from './../types/IResponse'
+import type { IRespUpdateRole } from './types'
 
-export interface IResp extends IResponse {
-    data: {
-        message: string
-    }
-}
-
-const updateRole = async (roleId: string, resourceId: string, enable: boolean): Promise<IResp> => {
+const updateRole = async (roleId: string, resourceId: string, enable: boolean): Promise<IRespUpdateRole> => {
     const resp = await megio.fetch(`saas/resources/update-role`, {
         method: 'POST',
         body: JSON.stringify({

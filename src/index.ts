@@ -11,7 +11,7 @@ import updateResources from './resources/update'
 import updateRole from './resources/updateRole'
 import removeRole from './resources/removeRole'
 import createRole from './resources/createRole'
-import type { IResponse } from './types/IResponse'
+import { IResponse } from './types'
 
 const props = {
     baseUrl: 'http://localhost:8090/',

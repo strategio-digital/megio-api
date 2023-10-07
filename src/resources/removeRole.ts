@@ -1,13 +1,7 @@
 import { megio } from './../index.ts'
-import type { IResponse } from './../types/IResponse'
+import type { IRespRemoveRole } from './types'
 
-export interface IResp extends IResponse {
-    data: {
-        message: string
-    }
-}
-
-const removeRole = async (roleId: string): Promise<IResp> => {
+const removeRole = async (roleId: string): Promise<IRespRemoveRole> => {
     const resp = await megio.fetch(`saas/resources/delete-role`, {
         method: 'DELETE',
         body: JSON.stringify({ id: roleId })

@@ -1,12 +1,7 @@
 import { megio } from './../index.ts'
-import type { IResponse } from './../types/IResponse'
-import type { IResponseData } from './types/IResponseData'
+import type { IRespUpdate } from './types'
 
-export interface IResp extends IResponse {
-    data: IResponseData
-}
-
-const update = async (viewResources: string[]): Promise<IResp> => {
+const update = async (viewResources: string[]): Promise<IRespUpdate> => {
     const resp = await megio.fetch(`saas/resources/update`, {
         method: 'POST',
         body: JSON.stringify({
