@@ -1,11 +1,11 @@
 {
   "name": "megio-api",
   "private": false,
-  "version": "0.7.12",
+  "version": "0.7.13",
   "type": "module",
   "main": "./dist/megio-api.umd.cjs",
   "module": "./dist/megio-api.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
