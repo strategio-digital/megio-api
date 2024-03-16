@@ -13,7 +13,7 @@ export interface IPagination {
 }
 
 export interface IRemoveParams {
-    table: string
+    recipe: string
     ids: string[]
 }
 
@@ -24,7 +24,7 @@ export interface IRow {
 
 export interface ISchema {
     meta: {
-        table: string,
+        recipe: string,
         invisible: string[]
     }
     props: ISchemaProp[]
@@ -64,13 +64,13 @@ export interface ISchemaProp {
 }
 
 export interface IShowOneParams {
-    table: string
+    recipe: string
     id: string
     schema?: boolean
 }
 
 export interface IShowParams {
-    table: string,
+    recipe: string,
     currentPage: number
     itemsPerPage: number
     schema?: boolean
