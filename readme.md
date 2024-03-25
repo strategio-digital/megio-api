@@ -44,19 +44,23 @@ const resp = await megio.auth.loginByEmail(...params)
 const resp = await megio.auth.revokeToken(...params)
 
 // Collections
-const resp = await megio.collections.show(...params)
-const resp = await megio.collections.showOne(...params)
-const resp = await megio.collections.remove(...params)
+const resp = await megio.collections.create(...params)
+const resp = await megio.collections.update(...params)
+const resp = await megio.collections.read(...params)
+const resp = await megio.collections.readAll(...params)
+const resp = await megio.collections.delete(...params)
+
+// Collections extra
+const resp = await megio.collectionsExtra.navbar(...params)
+const resp = await megio.collectionsExtra.creatingForm(...params)
+const resp = await megio.collectionsExtra.updatingForm(...params)
 
 // Resources
-const resp = await megio.resources.show(...params)
+const resp = await megio.resources.readAll(...params)
 const resp = await megio.resources.update(...params)
 const resp = await megio.resources.createRole(...params)
 const resp = await megio.resources.updateRole(...params)
 const resp = await megio.resources.removeRole(...params)
-
-// Navbar (collections)
-const resp = await megio.collections.navbar(...params)
 ```
 
 ## Working with user

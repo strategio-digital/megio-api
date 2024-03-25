@@ -42,7 +42,7 @@ export interface IRespUpdateRole extends IResponse {
     }
 }
 
-export interface IRespRemoveRole extends IResponse {
+export interface IRespDeleteRole extends IResponse {
     data: {
         message: string
     }

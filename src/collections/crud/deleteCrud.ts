@@ -1,7 +1,7 @@
 import { megio } from './../../index.ts'
-import type { IRemoveParams, IRespRemove } from '../types'
+import type { IDeleteParams, IRespDelete } from '../types'
 
-const remove = async (params: IRemoveParams): Promise<IRespRemove> => {
+const deleteCrud = async (params: IDeleteParams): Promise<IRespDelete> => {
     const resp = await megio.fetch(`megio/collections/delete`, {
         method: 'DELETE',
         body: JSON.stringify(params)
@@ -10,4 +10,4 @@ const remove = async (params: IRemoveParams): Promise<IRespRemove> => {
     return { ...resp, data: resp.data }
 }
 
-export default remove
+export default deleteCrud

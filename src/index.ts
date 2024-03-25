@@ -1,26 +1,51 @@
 import loginByEmail from './auth/loginByEmail'
 import logout from './auth/logout'
 import user from './auth/user'
-import show from './collections/crud/show'
-import showOne from './collections/crud/showOne'
-import remove from './collections/crud/remove'
-import revokeToken from './auth/revokeToken'
+
+import createCrud from './collections/crud/createCrud'
+import updateCrud from './collections/crud/updateCrud'
+import readAllCrud from './collections/crud/readAllCrud'
+import readCrud from './collections/crud/readCrud'
+import deleteCrud from './collections/crud/deleteCrud'
+
+import creatingForm from './collections/form/creatingForm'
+import updatingForm from './collections/form/updatingForm'
 import navbar from './collections/meta/navbar'
-import showResources from './resources/show'
+
+import revokeToken from './auth/revokeToken'
 import updateResources from './resources/update'
-import updateRole from './resources/updateRole'
-import removeRole from './resources/removeRole'
+
+import readAllResources from './resources/readAll'
 import createRole from './resources/createRole'
-import { IResponse } from './types'
+import updateRole from './resources/updateRole'
+
+import deleteRole from './resources/deleteRole'
+import { IResponse, IStorage } from './types'
+
+const storage: IStorage = {
+    getItem: (key: string) => localStorage.getItem(key),
+    setItem: (key: string, value: string) => localStorage.setItem(key, value),
+    removeItem: (key: string) => localStorage.removeItem(key)
+}
 
 const props = {
     baseUrl: 'http://localhost:8090/',
-    errorHandler: function (response: Response, errors: string[]) { console.error(response.status, errors) }
+    errorHandler: function (response: Response, errors: string[]) {
+        console.error(response.status, errors)
+    },
+    storage
 }
 
-export function setup(baseUrl: string, errorHandler: (response: Response, errors: string[]) => void) {
+export function getStorage() {
+    return props.storage
+}
+
+export function setup(baseUrl: string, errorHandler: (response: Response, errors: string[]) => void, storage: IStorage | null = null) {
     props.baseUrl = baseUrl
     props.errorHandler = errorHandler
+    if (storage !== null) {
+        props.storage = storage
+    }
 }
 
 async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
@@ -46,6 +71,7 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
     }
 
     return {
+        status: response.status,
         success: response.ok,
         data: json,
         errors: json.errors ? json.errors : []
@@ -55,10 +81,16 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
 export const megio = {
     fetch: fetchApi,
     collections: {
-        show,
-        showOne,
-        remove,
-        navbar
+        create: createCrud,
+        update: updateCrud,
+        read: readCrud,
+        readAll: readAllCrud,
+        delete: deleteCrud,
+    },
+    collectionsExtra: {
+        navbar,
+        creatingForm,
+        updatingForm
     },
     auth: {
         user,
@@ -67,10 +99,10 @@ export const megio = {
         revokeToken
     },
     resources: {
-        show: showResources,
+        readAll: readAllResources,
         update: updateResources,
         createRole,
         updateRole,
-        removeRole
+        deleteRole
     }
 }

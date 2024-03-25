@@ -1,7 +1,8 @@
 import type { IAuthUser } from './types'
+import { getStorage } from '../index'
 
 const currentUser = (): IAuthUser | null => {
-    const data = localStorage.getItem('megio_user')
+    const data = getStorage().getItem('megio_user')
     return data ? JSON.parse(data) : null
 }
 
