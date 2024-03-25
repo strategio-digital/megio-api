@@ -101,8 +101,6 @@ describe('collection endpoint url tests', () => {
             id: row_id
         })
 
-        console.log(resp);
-
         expect(resp.success).toBeTruthy()
     })
 
