@@ -48,11 +48,12 @@ export interface ICreateParams {
 export interface IRespCreate extends IResponse {
     data: {
         ids: IRow['id'][],
-        message: string
-    },
-    validation_errors?: {
-        [key: string]: string[];
-        '@': string[]
+        message: string,
+    } | {
+        validation_errors?: {
+            [key: string]: string[];
+            '@': string[]
+        }
     }
 }
 
@@ -137,7 +138,11 @@ export interface IFormProp {
     attrs: {
         [key: string]: any
     },
-    value: any
+    params: {
+        [key: string]: any
+    },
+    value: any,
+    default_value: any,
     errors: string[]
 }
 
