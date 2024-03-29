@@ -47,9 +47,8 @@ export interface ICreateParams {
 
 export interface IRespCreate extends IResponse {
     data: {
-        ids: IRow['id'][],
-        message: string,
-    } | {
+        ids?: IRow['id'][],
+        message?: string,
         validation_errors?: {
             [key: string]: string[];
             '@': string[]
