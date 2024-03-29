@@ -1,6 +1,5 @@
 import { megio, setup } from '../src'
 import { IStorage } from '../src/types'
-import { IRespCreate } from '../src/collections/types'
 
 describe('collection endpoint url tests', () => {
     const storageData = new Map<string, string>()
@@ -11,7 +10,7 @@ describe('collection endpoint url tests', () => {
         removeItem: (key: string) => storageData.delete(key)
     }
 
-    let row_id: IRespCreate['data']['ids'][0] = ''
+    let row_id: string = ''
 
     beforeAll(async () => {
         setup('http://localhost:8090/', () => {
@@ -39,7 +38,7 @@ describe('collection endpoint url tests', () => {
         })
 
         if (resp.success) {
-            row_id = resp.data.ids[0]
+            row_id = resp.data.ids?.[0] || ''
         }
 
         expect(resp.success).toBeTruthy()
