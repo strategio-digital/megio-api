@@ -10,12 +10,19 @@ export interface IColumnSchema {
     meta: {
         recipe: string
     }
-    props: IColumnProp[]
+    props: IColumnProp[],
+    search?: {
+        searchables: ISearchable[]
+    }
 }
 
 export interface IOrderBy {
     col: string
     desc: boolean
+}
+
+export interface ISearch {
+    text: string
 }
 
 export interface IPagination {
@@ -32,6 +39,12 @@ export interface IColumnProp {
     sortable: boolean,
     visible: boolean,
     formatters: string[] // class-names
+}
+
+export interface ISearchable {
+    column: string
+    relation: string | null
+    operator: string
 }
 
 export interface IRespNavbar extends IResponse {
@@ -85,6 +98,7 @@ export interface IReadAllParams {
     currentPage: number
     itemsPerPage: number
     orderBy?: IOrderBy[]
+    search?: ISearch
     schema?: boolean,
     adminPanel?: boolean
 }
