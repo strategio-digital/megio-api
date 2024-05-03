@@ -44,7 +44,6 @@ export interface IColumnProp {
 export interface ISearchable {
     column: string
     relation: string | null
-    operator: string
 }
 
 export interface IRespNavbar extends IResponse {
