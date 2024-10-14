@@ -20,7 +20,7 @@ import createRole from './resources/createRole'
 import updateRole from './resources/updateRole'
 
 import deleteRole from './resources/deleteRole'
-import { IResponse, IStorage } from './types'
+import { IResponse, IStorage, IUploadStats } from './types'
 
 const storage: IStorage = {
     getItem: (key: string) => localStorage.getItem(key),
@@ -49,18 +49,27 @@ export function setup(baseUrl: string, errorHandler: (response: Response, errors
 }
 
 async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
+    const headers: Record<string, any> = {
+        'Content-Type': 'application/json',
+        ...options?.headers
+    }
+
+    if (headers['Content-Type'] === 'none') {
+        delete headers['Content-Type']
+    }
+
     const info: RequestInit = {
         ...options,
-        headers: {
-            ...options?.headers,
-            'Content-Type': 'application/json'
-        }
+        headers
     }
 
     const currentUser = user.get()
 
     if (currentUser) {
-        info.headers = { ...info.headers, 'Authorization': `Bearer ${currentUser.bearer_token}` }
+        info.headers = {
+            ...info.headers,
+            'Authorization': `Bearer ${currentUser.bearer_token}`
+        }
     }
 
     const response = await fetch(props.baseUrl + uri, info)
@@ -78,14 +87,92 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
     }
 }
 
+async function upload(
+    uri: string,
+    formData: FormData,
+    onProgress: (stats: IUploadStats) => void
+): Promise<IResponse> {
+    return new Promise((resolve) => {
+        const xhr = new XMLHttpRequest()
+
+        xhr.upload.onprogress = (event: ProgressEvent) => {
+            if (event.lengthComputable) {
+                const percentComplete = (event.loaded / event.total) * 100
+                onProgress({
+                    percent: percentComplete,
+                    loaded: event.loaded,
+                    total: event.total
+                })
+            }
+        }
+
+        xhr.onload = async () => {
+            const response = xhrToResponse(xhr)
+            const json = await response.json()
+
+            if (response.status < 200 || response.status > 299) {
+                props.errorHandler(response, json.errors)
+            }
+
+            return resolve({
+                status: response.status,
+                success: response.ok,
+                data: json,
+                errors: json.errors ? json.errors : []
+            })
+        }
+
+        xhr.onerror = () => {
+            return resolve({
+                status: xhr.status,
+                success: false,
+                errors: ['Error while uploading file']
+            })
+        }
+
+        xhr.open('POST', uri)
+
+        const currentUser = user.get()
+
+        if (currentUser) {
+            xhr.setRequestHeader('Authorization', `Bearer ${currentUser.bearer_token}`)
+        }
+
+        xhr.send(formData)
+    })
+}
+
+function xhrToResponse(xhr: XMLHttpRequest): Response {
+    const headers = new Headers()
+    const allHeaders = xhr.getAllResponseHeaders()
+
+    allHeaders.trim().split(/[\r\n]+/).forEach((line) => {
+        const parts = line.split(': ')
+        const header = parts.shift()
+        const value = parts.join(': ')
+        if (header) {
+            headers.append(header, value)
+        }
+    })
+
+    const body = xhr.responseText
+
+    return new Response(body, {
+        status: xhr.status,
+        statusText: xhr.statusText,
+        headers: headers
+    })
+}
+
 export const megio = {
     fetch: fetchApi,
+    upload,
     collections: {
         create: createCrud,
         update: updateCrud,
         read: readCrud,
         readAll: readAllCrud,
-        delete: deleteCrud,
+        delete: deleteCrud
     },
     collectionsExtra: {
         navbar,

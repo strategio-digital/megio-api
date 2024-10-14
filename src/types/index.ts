@@ -12,3 +12,9 @@ export interface IStorage {
 
     removeItem(key: string): void;
 }
+
+export interface IUploadStats {
+    percent: number,
+    loaded: number,
+    total: number
+}
