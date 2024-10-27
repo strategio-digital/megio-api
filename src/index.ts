@@ -73,7 +73,17 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
     }
 
     const response = await fetch(props.baseUrl + uri, info)
-    const json = await response.json()
+    let json = null
+
+    try {
+        json = await response.json()
+    } catch (e) {
+        return {
+            status: response.status,
+            success: false,
+            errors: ['Error while fetching data']
+        }
+    }
 
     if (response.status < 200 || response.status > 299) {
         props.errorHandler(response, json.errors)
@@ -108,7 +118,17 @@ async function upload(
 
         xhr.onload = async () => {
             const response = xhrToResponse(xhr)
-            const json = await response.json()
+            let json = null
+
+            try {
+                json = await response.json()
+            } catch (e) {
+                return resolve({
+                    status: xhr.status,
+                    success: false,
+                    errors: ['Error while uploading file']
+                })
+            }
 
             if (response.status < 200 || response.status > 299) {
                 props.errorHandler(response, json.errors)
