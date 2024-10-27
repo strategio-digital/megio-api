@@ -80,11 +80,15 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
     } catch (e) {
     }
 
+    const statusText = response.statusText !== ''
+        ? response.statusText :
+        `Error ${response.status} (no status text)`
+
     if (response.status < 200 || response.status > 299) {
-        props.errorHandler(response, json ? json.errors : [response.statusText])
+        props.errorHandler(response, json ? json.errors : [statusText])
     }
 
-    const errors = json ? json.errors : [response.statusText]
+    const errors = json ? json.errors : [statusText]
 
     return {
         status: response.status,
@@ -122,11 +126,15 @@ async function upload(
             } catch (e) {
             }
 
+            const statusText = response.statusText !== ''
+                ? response.statusText :
+                `Error ${response.status} (no status text)`
+
             if (response.status < 200 || response.status > 299) {
-                props.errorHandler(response, json ? json.errors : [response.statusText])
+                props.errorHandler(response, json ? json.errors : [statusText])
             }
 
-            const errors = json ? json.errors : [response.statusText]
+            const errors = json ? json.errors : [statusText]
 
             return resolve({
                 status: response.status,
