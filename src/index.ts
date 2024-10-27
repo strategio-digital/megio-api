@@ -78,22 +78,19 @@ async function fetchApi(uri: string, options: RequestInit): Promise<IResponse> {
     try {
         json = await response.json()
     } catch (e) {
-        return {
-            status: response.status,
-            success: false,
-            errors: ['Error while fetching data']
-        }
     }
 
     if (response.status < 200 || response.status > 299) {
-        props.errorHandler(response, json.errors)
+        props.errorHandler(response, json ? json.errors : [response.statusText])
     }
+
+    const errors = json ? json.errors : [response.statusText]
 
     return {
         status: response.status,
         success: response.ok,
         data: json,
-        errors: json.errors ? json.errors : []
+        errors: errors ? errors : []
     }
 }
 
@@ -123,22 +120,19 @@ async function upload(
             try {
                 json = await response.json()
             } catch (e) {
-                return resolve({
-                    status: xhr.status,
-                    success: false,
-                    errors: ['Error while uploading file']
-                })
             }
 
             if (response.status < 200 || response.status > 299) {
-                props.errorHandler(response, json.errors)
+                props.errorHandler(response, json ? json.errors : [response.statusText])
             }
+
+            const errors = json ? json.errors : [response.statusText]
 
             return resolve({
                 status: response.status,
                 success: response.ok,
                 data: json,
-                errors: json.errors ? json.errors : []
+                errors: errors ? errors : []
             })
         }
 
@@ -146,7 +140,7 @@ async function upload(
             return resolve({
                 status: xhr.status,
                 success: false,
-                errors: ['Error while uploading file']
+                errors: [xhr.responseText]
             })
         }
 
