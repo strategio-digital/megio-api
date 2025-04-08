@@ -30,6 +30,7 @@ export interface IPagination {
     lastPage: number
     itemsPerPage: number
     itemsCountAll: number
+    orderBy: IOrderBy[]
 }
 
 export interface IColumnProp {
@@ -38,7 +39,8 @@ export interface IColumnProp {
     name: string,
     sortable: boolean,
     visible: boolean,
-    formatters: string[] // class-names
+    formatters: string[], // class-names
+    orderBy: IOrderBy[]
 }
 
 export interface ISearchable {
