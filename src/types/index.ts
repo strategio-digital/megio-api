@@ -18,3 +18,8 @@ export interface IUploadStats {
     loaded: number,
     total: number
 }
+
+export interface IRecipe {
+    name: string
+    key: string
+}

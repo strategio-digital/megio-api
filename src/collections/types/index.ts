@@ -1,4 +1,4 @@
-import { IResponse } from '../../types'
+import { IRecipe, IResponse } from '../../types'
 
 export interface IRow {
     id: string,
@@ -7,9 +7,7 @@ export interface IRow {
 }
 
 export interface IColumnSchema {
-    meta: {
-        recipe: string
-    }
+    recipe: IRecipe,
     props: IColumnProp[],
     search?: {
         searchables: ISearchable[]
@@ -50,12 +48,12 @@ export interface ISearchable {
 
 export interface IRespNavbar extends IResponse {
     data: {
-        items: string[]
+        items: IRecipe[]
     }
 }
 
 export interface ICreateParams {
-    recipe: string
+    recipeKey: string
     rows: Omit<IRow, 'id'>[]
 }
 
@@ -71,7 +69,7 @@ export interface IRespCreate extends IResponse {
 }
 
 export interface IUpdateParams {
-    recipe: string
+    recipeKey: string
     rows: Array<{
         id: IRow['id'],
         data: Omit<IRow, 'id'>
@@ -83,7 +81,7 @@ export interface IRespUpdate extends IRespCreate {
 }
 
 export interface IReadParams {
-    recipe: string
+    recipeKey: string
     id: IRow['id']
     schema?: boolean
     adminPanel?: boolean
@@ -95,7 +93,7 @@ export interface IRespRead extends IResponse {
 }
 
 export interface IReadAllParams {
-    recipe: string,
+    recipeKey: string,
     currentPage: number
     itemsPerPage: number
     orderBy?: IOrderBy[]
@@ -113,7 +111,7 @@ export interface IRespReadAll extends IResponse {
 }
 
 export interface IDeleteParams {
-    recipe: string
+    recipeKey: string
     ids: IRow['id'][]
 }
 
@@ -124,17 +122,18 @@ export interface IRespDelete extends IResponse {
 }
 
 export interface ICreateFormParams {
-    recipe: string
+    recipeKey: string
 }
 
 export interface IRespCreateForm extends IResponse {
     data: {
+        recipe: IRecipe
         form: IFormProp[]
     }
 }
 
 export interface IUpdateFormParams {
-    recipe: string,
+    recipeKey: string,
     id: IRow['id']
 }
 

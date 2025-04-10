@@ -27,7 +27,7 @@ describe('collection endpoint url tests', () => {
     it('collection create', async () => {
         const number = Math.floor(Math.random() * 1000)
         const resp = await megio.collections.create({
-            recipe: 'user',
+            recipeKey: 'user',
             rows: [
                 {
                     email: `jest-${number}@strategio.dev`,
@@ -47,7 +47,7 @@ describe('collection endpoint url tests', () => {
     it('collection update', async () => {
         const number = Math.floor(Math.random() * 1000)
         const resp = await megio.collections.update({
-            recipe: 'user',
+            recipeKey: 'user',
             rows: [
                 {
                     id: row_id,
@@ -63,7 +63,7 @@ describe('collection endpoint url tests', () => {
 
     it('collection read all', async () => {
         const resp = await megio.collections.readAll({
-            recipe: 'user',
+            recipeKey: 'user',
             schema: false,
             currentPage: 1,
             itemsPerPage: 10,
@@ -78,7 +78,7 @@ describe('collection endpoint url tests', () => {
 
     it('collection read', async () => {
         const resp = await megio.collections.read({
-            recipe: 'user',
+            recipeKey: 'user',
             schema: false,
             id: row_id
         })
@@ -88,7 +88,7 @@ describe('collection endpoint url tests', () => {
 
     it('collection form create', async () => {
         const resp = await megio.collectionsExtra.creatingForm({
-            recipe: 'user',
+            recipeKey: 'user',
         })
 
         expect(resp.success).toBeTruthy()
@@ -96,7 +96,7 @@ describe('collection endpoint url tests', () => {
 
     it('collection form update', async () => {
         const resp = await megio.collectionsExtra.updatingForm({
-            recipe: 'user',
+            recipeKey: 'user',
             id: row_id
         })
 
@@ -105,7 +105,7 @@ describe('collection endpoint url tests', () => {
 
     it('collection delete', async () => {
         const resp = await megio.collections.delete({
-            recipe: 'user',
+            recipeKey: 'user',
             ids: [row_id]
         })
 
