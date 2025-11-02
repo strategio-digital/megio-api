@@ -1,13 +1,23 @@
-import { megio } from './../../index.ts'
-import { ICreateParams, IRespCreate } from '../types'
+import { megio } from './../../index.ts';
+import { CreateParams, RespCreate, Row } from '../types';
 
-const createCrud = async (params: ICreateParams): Promise<IRespCreate> => {
-    const resp = await megio.fetch(`megio/collections/create`, {
-        method: 'POST',
-        body: JSON.stringify(params)
-    })
+const createCrud = async <T = Row>(
+	params: CreateParams<T>,
+): Promise<RespCreate> => {
+	return megio.fetch<
+		{
+			ids?: string[];
+			message?: string;
+			validation_errors?: {
+				[key: string]: string[];
+				'@': string[];
+			};
+		},
+		string[]
+	>(`megio/collections/create`, {
+		method: 'POST',
+		body: JSON.stringify(params),
+	});
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default createCrud
+export default createCrud;

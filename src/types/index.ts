@@ -1,25 +1,20 @@
-export interface IResponse {
-    data?: any
-    success: boolean
-    status: number
-    errors: string[]
+export type ResponseInterface<TSuccess, TError = string[]> =
+	| { success: true; status: number; data: TSuccess }
+	| { success: false; status: number; data: TError };
+
+export interface StorageInterface {
+	getItem(key: string): string | null;
+	setItem(key: string, value: string): void;
+	removeItem(key: string): void;
 }
 
-export interface IStorage {
-    getItem(key: string): string | null;
+export type UploadStats = {
+	percent: number;
+	loaded: number;
+	total: number;
+};
 
-    setItem(key: string, value: string): void;
-
-    removeItem(key: string): void;
-}
-
-export interface IUploadStats {
-    percent: number,
-    loaded: number,
-    total: number
-}
-
-export interface IRecipe {
-    name: string
-    key: string
-}
+export type Recipe = {
+	name: string;
+	key: string;
+};

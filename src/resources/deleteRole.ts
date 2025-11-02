@@ -1,13 +1,14 @@
-import { megio } from './../index.ts'
-import type { IRespDeleteRole } from './types'
+import { megio } from './../index.ts';
+import type { RespDeleteRole } from './types';
 
-const deleteRole = async (roleId: string): Promise<IRespDeleteRole> => {
-    const resp = await megio.fetch(`megio/resources/delete-role`, {
-        method: 'DELETE',
-        body: JSON.stringify({ id: roleId })
-    })
+const deleteRole = async (roleId: string): Promise<RespDeleteRole> => {
+	return megio.fetch<{ message: string }, string[]>(
+		`megio/resources/delete-role`,
+		{
+			method: 'DELETE',
+			body: JSON.stringify({ id: roleId }),
+		},
+	);
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default deleteRole
+export default deleteRole;

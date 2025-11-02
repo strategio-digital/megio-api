@@ -1,15 +1,17 @@
-import { megio } from './../index.ts'
-import type { IRespShow } from './types'
+import { megio } from './../index.ts';
+import type { RespShow, ResponseData } from './types';
 
-const readAll = async (viewResources: string[] | null = null, makeViewDiff: boolean = true): Promise<IRespShow> => {
-    const resp = await megio.fetch(`megio/resources/read-all`, {
-        method: 'POST',
-        body: JSON.stringify({
-            view_resources: viewResources,
-            make_view_diff: makeViewDiff
-        })
-    })
-    return { ...resp, data: resp.data }
-}
+const readAll = async (
+	viewResources: string[] | null = null,
+	makeViewDiff: boolean = true,
+): Promise<RespShow> => {
+	return megio.fetch<ResponseData, string[]>(`megio/resources/read-all`, {
+		method: 'POST',
+		body: JSON.stringify({
+			view_resources: viewResources,
+			make_view_diff: makeViewDiff,
+		}),
+	});
+};
 
-export default readAll
+export default readAll;

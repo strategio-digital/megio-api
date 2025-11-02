@@ -1,13 +1,20 @@
-import { IRespUpdateForm, IUpdateFormParams } from '../types'
-import { megio } from '../../index.ts'
+import { RespUpdateForm, UpdateFormParams, FormProp, Row } from '../types';
+import { Recipe } from '../../types';
+import { megio } from '../../index.ts';
 
-const updatingForm = async (params: IUpdateFormParams): Promise<IRespUpdateForm> => {
-    const resp = await megio.fetch(`megio/collections/form/updating`, {
-        method: 'POST',
-        body: JSON.stringify(params)
-    })
+const updatingForm = async <T = Row>(
+	params: UpdateFormParams<T>,
+): Promise<RespUpdateForm> => {
+	return megio.fetch<
+		{
+			recipe: Recipe;
+			form: FormProp[];
+		},
+		string[]
+	>(`megio/collections/form/updating`, {
+		method: 'POST',
+		body: JSON.stringify(params),
+	});
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default updatingForm
+export default updatingForm;

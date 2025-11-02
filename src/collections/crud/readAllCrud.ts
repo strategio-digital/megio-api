@@ -1,13 +1,26 @@
-import { megio } from './../../index.ts'
-import type { IRespReadAll, IReadAllParams } from '../types'
+import { megio } from './../../index.ts';
+import type {
+	RespReadAll,
+	ReadAllParams,
+	Pagination,
+	Row,
+	ColumnSchema,
+} from '../types';
 
-const readAllCrud = async (params: IReadAllParams): Promise<IRespReadAll> => {
-    const resp = await megio.fetch(`megio/collections/read-all`, {
-        method: 'POST',
-        body: JSON.stringify(params)
-    })
+const readAllCrud = async <T = Row>(
+	params: ReadAllParams,
+): Promise<RespReadAll<T>> => {
+	return megio.fetch<
+		{
+			pagination: Pagination;
+			items: T[];
+			schema?: ColumnSchema;
+		},
+		string[]
+	>(`megio/collections/read-all`, {
+		method: 'POST',
+		body: JSON.stringify(params),
+	});
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default readAllCrud
+export default readAllCrud;

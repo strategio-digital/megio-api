@@ -1,57 +1,45 @@
-import { IResponse } from '../../types'
+import { ResponseInterface } from '../../types';
 
-export interface IGroupedResourcesWithRoles {
-    groupName: string,
-    resources: Array<IResource & {
-        roles: IRole[],
-    }>,
-}
+export type GroupedResourcesWithRoles = {
+	groupName: string;
+	resources: Array<
+		Resource & {
+			roles: Role[];
+		}
+	>;
+};
 
-export interface IResource {
-    id: string
-    name: string
-    type: string
-    hint?: string
-}
+export type Resource = {
+	id: string;
+	name: string;
+	type: string;
+	hint?: string;
+};
 
-export interface IResourceDiff {
-    to_create: string[],
-    to_remove: string[]
-}
+export type ResourceDiff = {
+	to_create: string[];
+	to_remove: string[];
+};
 
-export interface IResponseData {
-    roles: IRole[],
-    resources: IResource[],
-    grouped_resources_with_roles: IGroupedResourcesWithRoles[],
-    resources_diff: IResourceDiff
-}
+export type ResponseData = {
+	roles: Role[];
+	resources: Resource[];
+	grouped_resources_with_roles: GroupedResourcesWithRoles[];
+	resources_diff: ResourceDiff;
+};
 
-export interface IRole {
-    id: string
-    name: string
-    enabled?: boolean
-}
+export type Role = {
+	id: string;
+	name: string;
+	enabled?: boolean;
+};
 
-export interface IRespCreateRole extends IResponse {
-    data: IRole
-}
+export type RespCreateRole = ResponseInterface<Role, string[]>;
 
-export interface IRespUpdateRole extends IResponse {
-    data: {
-        message: string
-    }
-}
+export type RespUpdateRole = ResponseInterface<{ message: string }, string[]>;
 
-export interface IRespDeleteRole extends IResponse {
-    data: {
-        message: string
-    }
-}
+export type RespDeleteRole = ResponseInterface<{ message: string }, string[]>;
 
-export interface IRespShow extends IResponse {
-    data: IResponseData
-}
+export type RespShow = ResponseInterface<ResponseData, string[]>;
 
-export interface IRespUpdate extends IResponse {
-    data: IResponseData
-}
+export type RespUpdate = ResponseInterface<ResponseData, string[]>;

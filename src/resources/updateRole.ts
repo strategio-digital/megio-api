@@ -1,17 +1,22 @@
-import { megio } from './../index.ts'
-import type { IRespUpdateRole } from './types'
+import { megio } from './../index.ts';
+import type { RespUpdateRole } from './types';
 
-const updateRole = async (roleId: string, resourceId: string, enable: boolean): Promise<IRespUpdateRole> => {
-    const resp = await megio.fetch(`megio/resources/update-role`, {
-        method: 'POST',
-        body: JSON.stringify({
-            role_id: roleId,
-            resource_id: resourceId,
-            enable
-        })
-    })
+const updateRole = async (
+	roleId: string,
+	resourceId: string,
+	enable: boolean,
+): Promise<RespUpdateRole> => {
+	return megio.fetch<{ message: string }, string[]>(
+		`megio/resources/update-role`,
+		{
+			method: 'POST',
+			body: JSON.stringify({
+				role_id: roleId,
+				resource_id: resourceId,
+				enable,
+			}),
+		},
+	);
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default updateRole
+export default updateRole;

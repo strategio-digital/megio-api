@@ -1,13 +1,23 @@
-import { megio } from './../../index.ts'
-import { IRespUpdate, IUpdateParams } from '../types'
+import { megio } from './../../index.ts';
+import { RespUpdate, UpdateParams, Row } from '../types';
 
-const createCrud = async (params: IUpdateParams): Promise<IRespUpdate> => {
-    const resp = await megio.fetch(`megio/collections/update`, {
-        method: 'PATCH',
-        body: JSON.stringify(params)
-    })
+const updateCrud = async <T = Row>(
+	params: UpdateParams<T>,
+): Promise<RespUpdate> => {
+	return megio.fetch<
+		{
+			ids?: string[];
+			message?: string;
+			validation_errors?: {
+				[key: string]: string[];
+				'@': string[];
+			};
+		},
+		string[]
+	>(`megio/collections/update`, {
+		method: 'PATCH',
+		body: JSON.stringify(params),
+	});
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default createCrud
+export default updateCrud;

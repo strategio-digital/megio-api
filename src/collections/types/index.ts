@@ -1,168 +1,156 @@
-import { IRecipe, IResponse } from '../../types'
+import { Recipe, ResponseInterface } from '../../types';
 
-export interface IRow {
-    id: string,
+export type Row<T = Record<string, any>> = {
+	id: string;
+} & T;
 
-    [key: string]: any
-}
+export type ColumnSchema = {
+	recipe: Recipe;
+	props: ColumnProp[];
+	search?: {
+		searchables: Searchable[];
+	};
+};
 
-export interface IColumnSchema {
-    recipe: IRecipe,
-    props: IColumnProp[],
-    search?: {
-        searchables: ISearchable[]
-    }
-}
+export type OrderBy = {
+	col: string;
+	desc: boolean;
+};
 
-export interface IOrderBy {
-    col: string
-    desc: boolean
-}
+export type Search = {
+	text: string;
+};
 
-export interface ISearch {
-    text: string
-}
+export type Pagination = {
+	currentPage: number;
+	lastPage: number;
+	itemsPerPage: number;
+	itemsCountAll: number;
+	orderBy: OrderBy[];
+};
 
-export interface IPagination {
-    currentPage: number
-    lastPage: number
-    itemsPerPage: number
-    itemsCountAll: number
-    orderBy: IOrderBy[]
-}
+export type ColumnProp = {
+	renderer: string;
+	key: string;
+	name: string;
+	sortable: boolean;
+	visible: boolean;
+	formatters: string[]; // class-names
+	orderBy: OrderBy[];
+};
 
-export interface IColumnProp {
-    renderer: string
-    key: string,
-    name: string,
-    sortable: boolean,
-    visible: boolean,
-    formatters: string[], // class-names
-    orderBy: IOrderBy[]
-}
+export type Searchable = {
+	column: string;
+	relation: string | null;
+};
 
-export interface ISearchable {
-    column: string
-    relation: string | null
-}
+export type RespNavbar = ResponseInterface<{ items: Recipe[] }, string[]>;
 
-export interface IRespNavbar extends IResponse {
-    data: {
-        items: IRecipe[]
-    }
-}
+export type CreateParams<T = Row> = {
+	recipeKey: string;
+	rows: Omit<T, 'id'>[];
+};
 
-export interface ICreateParams {
-    recipeKey: string
-    rows: Omit<IRow, 'id'>[]
-}
+export type RespCreate = ResponseInterface<
+	{
+		ids?: Row['id'][];
+		message?: string;
+		validation_errors?: {
+			[key: string]: string[];
+			'@': string[];
+		};
+	},
+	string[]
+>;
 
-export interface IRespCreate extends IResponse {
-    data: {
-        ids?: IRow['id'][],
-        message?: string,
-        validation_errors?: {
-            [key: string]: string[];
-            '@': string[]
-        }
-    }
-}
+export type UpdateParams<T = Row> = {
+	recipeKey: string;
+	rows: Array<{
+		id: T extends { id: infer ID } ? ID : string;
+		data: Omit<T, 'id'>;
+	}>;
+};
 
-export interface IUpdateParams {
-    recipeKey: string
-    rows: Array<{
-        id: IRow['id'],
-        data: Omit<IRow, 'id'>
-    }>
-}
+export type RespUpdate = RespCreate;
 
-export interface IRespUpdate extends IRespCreate {
+export type ReadParams<T = Row> = {
+	recipeKey: string;
+	id: T extends { id: infer ID } ? ID : string;
+	schema?: boolean;
+	adminPanel?: boolean;
+};
 
-}
+export type RespRead<T = Row> = ResponseInterface<T, string[]> & {
+	schema?: ColumnSchema;
+};
 
-export interface IReadParams {
-    recipeKey: string
-    id: IRow['id']
-    schema?: boolean
-    adminPanel?: boolean
-}
+export type ReadAllParams = {
+	recipeKey: string;
+	currentPage: number;
+	itemsPerPage: number;
+	orderBy?: OrderBy[];
+	search?: Search;
+	schema?: boolean;
+	adminPanel?: boolean;
+};
 
-export interface IRespRead extends IResponse {
-    data: IRow | any,
-    schema?: IColumnSchema
-}
+export type RespReadAll<T = Row> = ResponseInterface<
+	{
+		pagination: Pagination;
+		items: T[];
+		schema?: ColumnSchema;
+	},
+	string[]
+>;
 
-export interface IReadAllParams {
-    recipeKey: string,
-    currentPage: number
-    itemsPerPage: number
-    orderBy?: IOrderBy[]
-    search?: ISearch
-    schema?: boolean,
-    adminPanel?: boolean
-}
+export type DeleteParams<T = Row> = {
+	recipeKey: string;
+	ids: (T extends { id: infer ID } ? ID : string)[];
+};
 
-export interface IRespReadAll extends IResponse {
-    data: {
-        pagination: IPagination
-        items: IRow[]
-        schema?: IColumnSchema
-    }
-}
+export type RespDelete = ResponseInterface<{ message: string }, string[]>;
 
-export interface IDeleteParams {
-    recipeKey: string
-    ids: IRow['id'][]
-}
+export type CreateFormParams = {
+	recipeKey: string;
+};
 
-export interface IRespDelete extends IResponse {
-    data: {
-        message: string
-    }
-}
+export type RespCreateForm = ResponseInterface<
+	{
+		recipe: Recipe;
+		form: FormProp[];
+	},
+	string[]
+>;
 
-export interface ICreateFormParams {
-    recipeKey: string
-}
+export type UpdateFormParams<T = Row> = {
+	recipeKey: string;
+	id: T extends { id: infer ID } ? ID : string;
+};
 
-export interface IRespCreateForm extends IResponse {
-    data: {
-        recipe: IRecipe
-        form: IFormProp[]
-    }
-}
+export type RespUpdateForm = RespCreateForm;
 
-export interface IUpdateFormParams {
-    recipeKey: string,
-    id: IRow['id']
-}
+export type FormProp = {
+	renderer: string;
+	disabled: boolean;
+	name: string;
+	label: string;
+	rules: FormRule[];
+	serializers: string[]; // class-names
+	attrs: {
+		[key: string]: any;
+	};
+	params: {
+		[key: string]: any;
+	};
+	value: any;
+	default_value: any;
+	errors: string[];
+};
 
-export interface IRespUpdateForm extends IRespCreateForm {
-
-}
-
-export interface IFormProp {
-    renderer: string
-    disabled: boolean
-    name: string
-    label: string
-    rules: IFormRule[]
-    serializers: string[] // class-names
-    attrs: {
-        [key: string]: any
-    },
-    params: {
-        [key: string]: any
-    },
-    value: any,
-    default_value: any,
-    errors: string[]
-}
-
-export interface IFormRule {
-    name: string
-    message: string
-    params: {
-        [key: string]: any
-    }
-}
+export type FormRule = {
+	name: string;
+	message: string;
+	params: {
+		[key: string]: any;
+	};
+};

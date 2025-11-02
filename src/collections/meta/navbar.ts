@@ -1,9 +1,12 @@
-import { megio } from './../../index.ts'
-import type { IRespNavbar } from '../types'
+import { megio } from './../../index.ts';
+import type { RespNavbar } from '../types';
+import { Recipe } from '../../types';
 
-const navbar = async (): Promise<IRespNavbar> => {
-    const resp = await megio.fetch(`megio/collections/navbar`, { method: 'POST' })
-    return { ...resp, data: resp.data }
-}
+const navbar = async (): Promise<RespNavbar> => {
+	return megio.fetch<{ items: Recipe[] }, string[]>(
+		`megio/collections/navbar`,
+		{ method: 'POST' },
+	);
+};
 
-export default navbar
+export default navbar;

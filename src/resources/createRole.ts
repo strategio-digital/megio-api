@@ -1,13 +1,11 @@
-import { megio } from './../index.ts'
-import type { IRespCreateRole } from './types'
+import { megio } from './../index.ts';
+import type { RespCreateRole, Role } from './types';
 
-const createRole = async (name: string): Promise<IRespCreateRole> => {
-    const resp = await megio.fetch(`megio/resources/create-role`, {
-        method: 'POST',
-        body: JSON.stringify({ name })
-    })
+const createRole = async (name: string): Promise<RespCreateRole> => {
+	return megio.fetch<Role, string[]>(`megio/resources/create-role`, {
+		method: 'POST',
+		body: JSON.stringify({ name }),
+	});
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default createRole
+export default createRole;

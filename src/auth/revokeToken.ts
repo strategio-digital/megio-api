@@ -1,13 +1,14 @@
-import { megio } from './../index.ts'
-import type { IRespRevokeToken } from './types'
+import { megio } from './../index.ts';
+import type { RespRevokeToken } from './types';
 
-const revokeToken = async (user_ids: string[], source: string): Promise<IRespRevokeToken> => {
-    const resp = await megio.fetch(`megio/auth/revoke-token`, {
-        method: 'POST',
-        body: JSON.stringify({ source, user_ids })
-    })
+const revokeToken = async (
+	user_ids: string[],
+	source: string,
+): Promise<RespRevokeToken> => {
+	return megio.fetch<{ message: string }, string[]>(`megio/auth/revoke-token`, {
+		method: 'POST',
+		body: JSON.stringify({ source, user_ids }),
+	});
+};
 
-    return { ...resp, data: resp.data }
-}
-
-export default revokeToken
+export default revokeToken;

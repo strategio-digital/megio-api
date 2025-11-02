@@ -1,7 +1,7 @@
-import { getStorage } from '../index'
+import { getStorage } from '../index';
 
 const logout = (): void => {
-    getStorage().removeItem('megio_user')
-}
+	getStorage().removeItem('megio_user');
+};
 
-export default logout
+export default logout;
