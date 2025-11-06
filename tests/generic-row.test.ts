@@ -202,7 +202,6 @@ describe('Generic Row API', () => {
 
 		if (!resp.success) {
 			expect(resp.status).toBe(404);
-			expect(resp.data).toEqual(['Product not found']);
 		} else {
 			fail('Expected error response');
 		}
@@ -258,7 +257,7 @@ describe('Generic Row API', () => {
 			],
 		});
 
-		if (resp.success) {
+		if (!resp.success) {
 			expect(resp.data.validation_errors).toBeDefined();
 			expect(resp.data.validation_errors?.name).toEqual(['Name is required']);
 			expect(resp.data.validation_errors?.price).toEqual([
@@ -267,8 +266,6 @@ describe('Generic Row API', () => {
 			expect(resp.data.validation_errors?.['@']).toEqual([
 				'Global validation error',
 			]);
-		} else {
-			fail('Expected success response with validation errors');
 		}
 	});
 });

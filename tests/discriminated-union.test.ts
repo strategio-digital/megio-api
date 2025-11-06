@@ -23,12 +23,12 @@ describe('Discriminated Union API', () => {
 			json: async () => ({ id: '123', name: 'Test User' }),
 		});
 
-		const resp = await megio.fetch<{ id: string; name: string }, string[]>(
-			'test/endpoint',
-			{
-				method: 'GET',
-			},
-		);
+		const resp = await megio.fetch<
+			{ id: string; name: string },
+			{ errors: string[] }
+		>('test/endpoint', {
+			method: 'GET',
+		});
 
 		// Type narrowing works!
 		if (resp.success) {
@@ -48,15 +48,21 @@ describe('Discriminated Union API', () => {
 			json: async () => ({ errors: ['Invalid credentials', 'Token expired'] }),
 		});
 
-		const resp = await megio.fetch<{ id: string }, string[]>('test/endpoint', {
-			method: 'GET',
-		});
+		const resp = await megio.fetch<{ id: string }, { errors: string[] }>(
+			'test/endpoint',
+			{
+				method: 'GET',
+			},
+		);
 
 		// Type narrowing works!
 		if (!resp.success) {
 			expect(resp.status).toBe(401);
-			expect(Array.isArray(resp.data)).toBe(true);
-			expect(resp.data).toEqual(['Invalid credentials', 'Token expired']);
+			expect(Array.isArray(resp.data.errors)).toBe(true);
+			expect(resp.data.errors).toEqual([
+				'Invalid credentials',
+				'Token expired',
+			]);
 		} else {
 			fail('Expected error response');
 		}
@@ -71,12 +77,11 @@ describe('Discriminated Union API', () => {
 
 		const { data, success, status } = await megio.fetch<
 			{ value: number },
-			string[]
+			{ errors: string[] }
 		>('test', { method: 'GET' });
 
 		if (success) {
-			console.log(status); // 200
-			console.log('Request successful:', data.value); // 42
+            expect(status).toBe(200);
 			expect(data.value).toBe(42);
 		}
 	});
@@ -91,13 +96,12 @@ describe('Discriminated Union API', () => {
 
 		const { data, success, status } = await megio.fetch<
 			{ value: number },
-			string[]
+			{ errors: string[] }
 		>('test', { method: 'GET' });
 
 		if (!success) {
-			console.error('Request failed:', data); // ['Database connection failed']
 			expect(status).toBe(500);
-			expect(data).toEqual(['Database connection failed']);
+			expect(data.errors).toEqual(['Database connection failed']);
 		}
 	});
 });
