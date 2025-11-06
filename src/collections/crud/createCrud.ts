@@ -6,14 +6,16 @@ const createCrud = async <T = Row>(
 ): Promise<RespCreate> => {
 	return megio.fetch<
 		{
-			ids?: string[];
-			message?: string;
-			validation_errors?: {
+			ids: string[];
+			message: string;
+		},
+		{
+			errors: string[];
+			validation_errors: {
 				[key: string]: string[];
 				'@': string[];
 			};
-		},
-		string[]
+		}
 	>(`megio/collections/create`, {
 		method: 'POST',
 		body: JSON.stringify(params),

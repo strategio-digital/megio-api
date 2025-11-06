@@ -6,14 +6,16 @@ const updateCrud = async <T = Row>(
 ): Promise<RespUpdate> => {
 	return megio.fetch<
 		{
-			ids?: string[];
-			message?: string;
-			validation_errors?: {
+			ids: string[];
+			message: string;
+		},
+		{
+			errors: string[];
+			validation_errors: {
 				[key: string]: string[];
 				'@': string[];
 			};
-		},
-		string[]
+		}
 	>(`megio/collections/update`, {
 		method: 'PATCH',
 		body: JSON.stringify(params),

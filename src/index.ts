@@ -98,7 +98,7 @@ async function fetchApi<TData, TError>(
 			data: json,
 		};
 	} else {
-		const errorData = json ? json.errors : [statusText];
+		const errorData = json || { general: [statusText] };
 		props.errorHandler(response, errorData);
 		return {
 			success: false,
@@ -147,7 +147,7 @@ async function upload<TData, TError>(
 					data: json,
 				});
 			} else {
-				const errorData = json ? json.errors : [statusText];
+				const errorData = json || { general: [statusText] };
 				props.errorHandler(response, errorData);
 				return resolve({
 					success: false,

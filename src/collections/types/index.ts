@@ -53,14 +53,16 @@ export type CreateParams<T = Row> = {
 
 export type RespCreate = ResponseInterface<
 	{
-		ids?: Row['id'][];
-		message?: string;
-		validation_errors?: {
+		ids: Row['id'][];
+		message: string;
+	},
+	{
+		errors: string[];
+		validation_errors: {
 			[key: string]: string[];
 			'@': string[];
 		};
-	},
-	string[]
+	}
 >;
 
 export type UpdateParams<T = Row> = {
