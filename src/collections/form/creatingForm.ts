@@ -10,7 +10,7 @@ const creatingForm = async (
 			recipe: Recipe;
 			form: FormProp[];
 		},
-		string[]
+		{ errors: string[] }
 	>(`megio/collections/form/creating`, {
 		method: 'POST',
 		body: JSON.stringify(params),

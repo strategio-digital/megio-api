@@ -6,7 +6,7 @@ const updateRole = async (
 	resourceId: string,
 	enable: boolean,
 ): Promise<RespUpdateRole> => {
-	return megio.fetch<{ message: string }, string[]>(
+	return megio.fetch<{ message: string }, { errors: string[] }>(
 		`megio/resources/update-role`,
 		{
 			method: 'POST',

@@ -34,12 +34,18 @@ export type Role = {
 	enabled?: boolean;
 };
 
-export type RespCreateRole = ResponseInterface<Role, string[]>;
+export type RespCreateRole = ResponseInterface<Role, { errors: string[] }>;
 
-export type RespUpdateRole = ResponseInterface<{ message: string }, string[]>;
+export type RespUpdateRole = ResponseInterface<
+	{ message: string },
+	{ errors: string[] }
+>;
 
-export type RespDeleteRole = ResponseInterface<{ message: string }, string[]>;
+export type RespDeleteRole = ResponseInterface<
+	{ message: string },
+	{ errors: string[] }
+>;
 
-export type RespShow = ResponseInterface<ResponseData, string[]>;
+export type RespShow = ResponseInterface<ResponseData, { errors: string[] }>;
 
-export type RespUpdate = ResponseInterface<ResponseData, string[]>;
+export type RespUpdate = ResponseInterface<ResponseData, { errors: string[] }>;

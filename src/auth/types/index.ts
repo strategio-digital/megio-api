@@ -17,6 +17,9 @@ export type User = Row<{
 	role: string;
 }>;
 
-export type RespLoginByEmail = ResponseInterface<AuthUser, string[]>;
+export type RespLoginByEmail = ResponseInterface<AuthUser, { general: string }>;
 
-export type RespRevokeToken = ResponseInterface<{ message: string }, string[]>;
+export type RespRevokeToken = ResponseInterface<
+	{ message: string },
+	{ errors: string[] }
+>;

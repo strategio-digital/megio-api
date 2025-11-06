@@ -1,4 +1,4 @@
-export type ResponseInterface<TSuccess, TError = string[]> =
+export type ResponseInterface<TSuccess, TError> =
 	| { success: true; status: number; data: TSuccess }
 	| { success: false; status: number; data: TError };
 

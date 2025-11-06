@@ -30,9 +30,9 @@ const storage: StorageInterface = {
 
 const props = {
 	baseUrl: 'http://localhost:8090/',
-	errorHandler: function (response: Response, errorData: unknown) {
+	errorHandler: function (response: Response, errorData: any) {
 		console.error(response.status, errorData);
-	},
+	} as (response: Response, errorData: any) => void,
 	storage,
 };
 
@@ -40,9 +40,9 @@ export function getStorage() {
 	return props.storage;
 }
 
-export function setup(
+export function setup<Err = { errors: string[] }>(
 	baseUrl: string,
-	errorHandler: (response: Response, errorData: unknown) => void,
+	errorHandler: (response: Response, errorData: Err) => void,
 	storage: StorageInterface | null = null,
 ) {
 	props.baseUrl = baseUrl;

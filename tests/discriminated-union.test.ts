@@ -81,7 +81,7 @@ describe('Discriminated Union API', () => {
 		>('test', { method: 'GET' });
 
 		if (success) {
-            expect(status).toBe(200);
+			expect(status).toBe(200);
 			expect(data.value).toBe(42);
 		}
 	});

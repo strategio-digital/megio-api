@@ -16,7 +16,7 @@ const readAllCrud = async <T = Row>(
 			items: T[];
 			schema?: ColumnSchema;
 		},
-		string[]
+		{ errors: string[] }
 	>(`megio/collections/read-all`, {
 		method: 'POST',
 		body: JSON.stringify(params),

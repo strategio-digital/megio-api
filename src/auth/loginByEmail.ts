@@ -6,10 +6,13 @@ const loginByEmail = async (
 	password: string,
 	source: string,
 ): Promise<RespLoginByEmail> => {
-	const resp = await megio.fetch<AuthUser, string[]>('megio/auth/email', {
-		method: 'POST',
-		body: JSON.stringify({ source, email, password }),
-	});
+	const resp = await megio.fetch<AuthUser, { general: string }>(
+		'megio/auth/email',
+		{
+			method: 'POST',
+			body: JSON.stringify({ source, email, password }),
+		},
+	);
 
 	if (
 		resp.success &&
@@ -22,7 +25,7 @@ const loginByEmail = async (
 		return {
 			success: false,
 			status: resp.status,
-			data: ['No resources available'],
+			data: { general: 'No resources available' },
 		};
 	}
 

@@ -44,7 +44,7 @@ export type Searchable = {
 	relation: string | null;
 };
 
-export type RespNavbar = ResponseInterface<{ items: Recipe[] }, string[]>;
+export type RespNavbar = ResponseInterface<{ items: Recipe[] }, null>;
 
 export type CreateParams<T = Row> = {
 	recipeKey: string;
@@ -82,7 +82,7 @@ export type ReadParams<T = Row> = {
 	adminPanel?: boolean;
 };
 
-export type RespRead<T = Row> = ResponseInterface<T, string[]> & {
+export type RespRead<T = Row> = ResponseInterface<T, { errors: string[] }> & {
 	schema?: ColumnSchema;
 };
 
@@ -102,7 +102,7 @@ export type RespReadAll<T = Row> = ResponseInterface<
 		items: T[];
 		schema?: ColumnSchema;
 	},
-	string[]
+	{ errors: string[] }
 >;
 
 export type DeleteParams<T = Row> = {
@@ -110,7 +110,10 @@ export type DeleteParams<T = Row> = {
 	ids: (T extends { id: infer ID } ? ID : string)[];
 };
 
-export type RespDelete = ResponseInterface<{ message: string }, string[]>;
+export type RespDelete = ResponseInterface<
+	{ message: string },
+	{ errors: string[] }
+>;
 
 export type CreateFormParams = {
 	recipeKey: string;
@@ -121,7 +124,7 @@ export type RespCreateForm = ResponseInterface<
 		recipe: Recipe;
 		form: FormProp[];
 	},
-	string[]
+	{ errors: string[] }
 >;
 
 export type UpdateFormParams<T = Row> = {

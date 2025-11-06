@@ -10,7 +10,7 @@ const updatingForm = async <T = Row>(
 			recipe: Recipe;
 			form: FormProp[];
 		},
-		string[]
+		{ errors: string[] }
 	>(`megio/collections/form/updating`, {
 		method: 'POST',
 		body: JSON.stringify(params),
